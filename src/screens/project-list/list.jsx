@@ -1,5 +1,4 @@
 export const List = ({list,users}) => {
-    console.log('专门打印',list)
     return(
             <table>
                 <thead>

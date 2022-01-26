@@ -10,7 +10,7 @@ export const SearchPanel = (props) =>{
                     /*这种写要很熟悉，对象有多个键值对，覆盖所要修改的键值对
                     * 等于 Object.assisn({},param,{name:e.target.value})*/
                     ...param,
-                    name: e.target.value
+                    name: e.target.value.trim()
                 })}></input>
                 <select value={param.passonId} onChange={ e => setParam(
                     {
