@@ -1,19 +1,26 @@
 import {useEffect,useState} from 'react'
-export const isFalsy = (value) => value === 0 ? false: !value
-export const cleanObject = (object) =>{
+
+export const isFalsy = (value:unknown) => value === 0 ? false: !value
+export const cleanObject = (object:object) =>{
     const result = {...object}
     Object.keys(result).forEach(
         key => {
+            // @ts-ignore
             const value = result[key]
             if(isFalsy(value)) {
+                // @ts-ignore
                 delete result[key]
             }
         }
     )
     return result
 }
+
+
 /*react自带的hook只能在组件或者自定义hook中运行，否则会报错*/
-export const useMount = (callback) =>{
+
+
+export const useMount = (callback: () => void ) =>{
     useEffect( ()=>{
         callback()
     },[])
@@ -34,8 +41,8 @@ const debounce = (func,delay) => {
 }
 */
 
-
-export const  useDebounce = (value, delay) =>{
+/*我们希望value是什么类型，返回的debouncedValue就是什么类型，这就很依赖泛型*/
+export const  useDebounce = (value:unknown, delay?:number):any =>{
     const [debouncedValue, setDebouncedValue] = useState (value)
     useEffect(()=> {
         /*每次在value变化后，设置一个定时器，*/
