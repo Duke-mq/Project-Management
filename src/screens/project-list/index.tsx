@@ -8,6 +8,12 @@ export const ProjectListScreen = ()=>{
     /*确定要提升的状态 */
     const [list,setList] = useState([])
     const [users, setUsers] = useState([])
+    /*看到useState的类型定义，这里用到的是泛型，通过setState传入的类型来给到param类型，即输入啥类型，
+    输出就是啥类型。 定义的时候是一个占位符，传入相等于
+    interfa <T> {
+        name:string,
+        personId:string
+    },再把T与paran和返回的setParam的类型强绑定下来*/
     const [param, setParam] = useState({
         name:'',
         personId:''

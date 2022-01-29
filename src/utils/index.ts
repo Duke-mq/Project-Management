@@ -42,7 +42,7 @@ const debounce = (func,delay) => {
 */
 
 /*我们希望value是什么类型，返回的debouncedValue就是什么类型，这就很依赖泛型*/
-export const  useDebounce = (value:unknown, delay?:number):any =>{
+export const  useDebounce = <V>(value:V, delay?:number)=>{
     const [debouncedValue, setDebouncedValue] = useState (value)
     useEffect(()=> {
         /*每次在value变化后，设置一个定时器，*/
@@ -52,6 +52,18 @@ export const  useDebounce = (value:unknown, delay?:number):any =>{
     },[value, delay])
     return debouncedValue
 }
+
+
+// export const useArray = <T>(initialArray:T[]) =>{
+//     const [value,setValue] = useState(initialArray)
+//     return {
+//         value,
+//         setValue,
+//         add: (item:T) => setValue([...value, item]),
+//         clear:() => setValue([]),
+//         removeIndex:(index:number)
+//     }
+// }
 
 
 //debounce 原理详解
