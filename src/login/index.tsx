@@ -20,9 +20,11 @@ export const LoginScreen =  () =>{
             method:'POST',
             headers:{'Content-Type': 'application/json'},
             body: JSON.stringify(param)
-        }).then(async response => {
+        }).then(response => {
             if(response.ok) {
-                console.log(response)
+               response.json().then(
+                   data => console.log(data)
+               )
             }
         })
     }
