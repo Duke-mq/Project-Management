@@ -20,11 +20,10 @@ export const LoginScreen =  () =>{
             method:'POST',
             headers:{'Content-Type': 'application/json'},
             body: JSON.stringify(param)
-        }).then(response => {
+        }).then(async response => {
             if(response.ok) {
-               response.json().then(
-                   data => console.log(data)
-               )
+                let result = await response.json()
+                console.log(result)
             }
         })
     }
