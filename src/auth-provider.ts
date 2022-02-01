@@ -1,9 +1,9 @@
 /*在真实环境中，如果使用firebase这种第三方auth服务的话，本文件不需要开发者开发,这个文件实现的功能是模拟第三方服务的auth*/
-import { User } from "screens/project-list/search-pannel";
+import { User } from "screens/project-list/search-panel";
 const localStorageKey = "__auth_provider_token__";
 const apiUrl = process.env.REACT_APP_API_URL;
 export const getToken = () => window.localStorage.getItem(localStorageKey);
-export const handleUserResponse = ({ user }: { user: User }) => {
+export const handleUserResponse = ( {user} : { user: User }) => {
     window.localStorage.setItem(localStorageKey, user.token || "");
     return user;
 };
@@ -18,9 +18,10 @@ export const login = (data: { username: string; password: string }) => {
         body: JSON.stringify(data),
     }).then(async (response) => {
         if (response.ok) {
+            console.log(await response.json)
             return handleUserResponse(await response.json());
         } else {
-            console.log(await response.json)
+
             return Promise.reject(await response.json());
         }
     });
@@ -45,4 +46,4 @@ export const register = (data: { username: string; password: string }) => {
 };
 
 
-export const logout = ()=>window.localStorage.removeItem(localStorageKey)
+export const logout = async ()=>window.localStorage.removeItem(localStorageKey)
