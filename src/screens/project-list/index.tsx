@@ -1,9 +1,13 @@
-import {SearchPanel} from './search-panel'
-import {List} from './list'
 import {useState,useEffect} from 'react'
+import {SearchPanel} from './search-panel'
+import {cleanObject,useMount,useDebounce} from 'utils'
+import  {useHttp} from 'utils/http'
+import {List} from './list'
 import * as qs from "qs"
-import {cleanObject,useMount,useDebounce} from '../../utils'
+
+
 const apiUrl = process.env.REACT_APP_API_URL
+
 export const ProjectListScreen = ()=>{
     /*确定要提升的状态 */
     const [list,setList] = useState([])
@@ -18,21 +22,29 @@ export const ProjectListScreen = ()=>{
         name:'',
         personId:''
     })
-    const debounceParam = useDebounce(param,500)
+    const debounceParam = useDebounce(param,200)
+    const client = useHttp()
     useEffect(() =>{
-        fetch(`${apiUrl}/projects?${qs.stringify(cleanObject(debounceParam))}`).then(async response => {
-            if(response.ok) {
-                setList(await response.json())
-            }
-        })
+        client('projects',{data: cleanObject(debounceParam)}).then(data => {
+                setList(data)
+                console.log(data)
+            })
+        // fetch(`${apiUrl}/projects?${qs.stringify(cleanObject(debounceParam))}`).then(async response => {
+        //     if(response.ok) {
+        //         setList(await response.json())
+        //     }
+        // })
     },[debounceParam])
     /*只在最开始的时候获取,很多时候都会用到，我们就可以抽象一个自定义hook*/
     useMount(() =>{
-        fetch(`${apiUrl}/users`).then(async response => {
-            if(response.ok) {
-                setUsers(await response.json())
-            }
+        client('users').then(data => {setUsers(data)
+            console.log(data)
         })
+        // fetch(`${apiUrl}/users`).then(async response => {
+        //     if(response.ok) {
+        //         setUsers(await response.json())
+        //     }
+        // })
     })
     
 
