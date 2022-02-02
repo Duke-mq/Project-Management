@@ -21,12 +21,10 @@ export const login = (data: { username: string; password: string }) => {
             console.log(await response.json)
             return handleUserResponse(await response.json());
         } else {
-
             return Promise.reject(await response.json());
         }
     });
 };
-
 
 export const register = (data: { username: string; password: string }) => {
     return fetch(`${apiUrl}/register`, {

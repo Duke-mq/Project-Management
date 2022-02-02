@@ -1,12 +1,13 @@
 import React, {useState} from "react"
 import { User } from "screens/project-list/search-panel";
 import * as auth from "auth-provider"
-import {ReactNode} from "../../../WebStorm 2021.3.1/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external/react";
+import {ReactNode} from "react";
+/*附上type / interface关键字的区别 https://juejin.cn/post/6844903749501059085*/
+
 interface AuthForm {
     username: string,
     password:string
 }
-
 type InitContext = {
     user: User | null;
     login: (form: AuthForm) => Promise<void>;
