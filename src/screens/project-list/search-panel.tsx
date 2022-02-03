@@ -1,3 +1,5 @@
+import {Input, Select } from "antd"
+// import {Input, Select} from 'antd'
 export interface  User {
     id:string;
     name:string;
@@ -21,22 +23,21 @@ export const SearchPanel = ({param,users,setParam}:SearchPanelProps) =>{
     return(
         <form>
             <div>
-                <input type="text" value={param.name} onChange={e => setParam({
+                <Input type="text" value={param.name} onChange={e => setParam({
                     /*这种写要很熟悉，对象有多个键值对，覆盖所要修改的键值对
                     * 等于 Object.assisn({},param,{name:e.target.value})*/
                     ...param,
                     name: e.target.value.trim()
-                })}></input>
-                <select value={param.personId} onChange={ e => setParam(
+                })}></Input>
+                <Select value={param.personId} onChange={ value => setParam({
+                    ...param,
+                    personId:value
+                })}>
+                    <Select.Option value={""}>负责人</Select.Option>
                     {
-                        ...param,
-                        personId:e.target.value,
-                    })}>
-                    <option value={param.personId}>负责人</option>
-                    {
-                        users.map( user => <option  key={user.id} value = {user.id}> {user.name} </option>)
+                        users.map( user => <Select.Option  key={user.id} value = {user.id}> {user.name} </Select.Option>)
                     }
-                </select>
+                </Select>
             </div>
         </form>)
 

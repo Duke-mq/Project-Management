@@ -4,10 +4,7 @@ import {cleanObject,useMount,useDebounce} from 'utils'
 import  {useHttp} from 'utils/http'
 import {List} from './list'
 import * as qs from "qs"
-
-
 const apiUrl = process.env.REACT_APP_API_URL
-
 export const ProjectListScreen = ()=>{
     /*确定要提升的状态 */
     const [list,setList] = useState([])
