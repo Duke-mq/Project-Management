@@ -36,3 +36,17 @@
 /*    transform: rotate(360deg);*/
 /*  }*/
 /*}*/
+
+/*全局样式只在App.css里面维护*/
+html {
+  /*em是相对父元素的font-size
+    rem是相对根元素html的font-size，r就是root的意思*/
+  /*1rem就是根元素的font-size 浏览器默认是16px，62.5%就是10px*/
+  font-size: 62.5%;
+}
+
+
+
+html body #root .App {
+  min-height: 100vh;
+}
