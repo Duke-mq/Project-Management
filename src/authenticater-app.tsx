@@ -4,6 +4,9 @@ import {useAuth} from 'context/auth-context'
 import {ProjectListScreen} from 'screens/project-list'
 import styled from '@emotion/styled';
 import { Row } from 'components/lib';
+/*渲染svg强大的方法，把svg作为react组件渲染，这样的好处是可以自定义样式*/
+import { ReactComponent as SoftWareLogo } from "assets/software-logo.svg";
+import {Button, Dropdown, Menu } from 'antd';
 
 /**
  * gird 和 flex 各自的应用场景
@@ -14,16 +17,30 @@ import { Row } from 'components/lib';
  * 从内容出发用flex，从布局出发用grid
  * */
 export const AuthenticatedApp = () => {
-    const {logout} = useAuth()
+    const {logout,user} = useAuth()
     return <Container>
         <Header between={true}>
             <HeaderLeft gap={true}>
-                <h2>logo</h2>
+                <SoftWareLogo width={"18rem"} color={"rgb(38, 132, 255)"} />
                 <h2>项目</h2>
                 <h2>logo</h2>
+                {/*我们可以改变 比如 HeaderItem as {'div'} 这样标签就可以变成div了*/}
             </HeaderLeft>
             <HeaderRight>
-                <button onClick={logout}>登出</button>
+                <Dropdown
+                    overlay={
+                        <Menu>
+                            <Menu.Item key={"logout"}>
+                                <Button type={"link"} onClick={logout}>
+                                    登出
+                                </Button>
+                            </Menu.Item>
+                        </Menu>
+                    }
+                >
+                    <Button type={"link"}>Hi, {user?.name}</Button>
+                </Dropdown>
+                {/*<button onClick={logout}>登出</button>*/}
             </HeaderRight>
         </Header>
         <Main>
@@ -45,9 +62,9 @@ const Container = styled.div`
 `
 
 const Header = styled(Row)`
-  justify-content: space-between;
   padding: 3.2rem;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  justify-content: space-between;
  /* display: flex;
   flex-direction: row;
   align-items: center;
