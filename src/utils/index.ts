@@ -1,13 +1,25 @@
 import {useEffect,useState} from 'react'
+
+
+export const isVoid = (value:unknown) => value === undefined || value === null || value === ""
 export const isFalsy = (value:unknown) => value === 0 ? false: !value
-export const cleanObject = (object:object) =>{
+/*
+let a:object
+a = {name: 'jack'}
+a = () =>{}
+a = new RegExp('')
+let b:{[key:string]:unknown}
+b = {name: 'jack'}
+/!*b如果是一个函数就会报错了*!/
+b = () =>{}*/
+/*我们对object进行解构，object里面不止是键值对 还可以是函数，正则对象 {...object} 索性就返回一个{''} 空对象
+* 解决方案就是我们写要传入的对象必须是键值对的形式*/
+export const cleanObject = (object:{[key:string]:unknown}) =>{
     const result = {...object}
     Object.keys(result).forEach(
         key => {
-            // @ts-ignore
             const value = result[key]
-            if(isFalsy(value)) {
-                // @ts-ignore
+            if(isVoid(value)) {
                 delete result[key]
             }
         }
@@ -22,6 +34,7 @@ export const cleanObject = (object:object) =>{
 export const useMount = (callback: () => void ) =>{
     useEffect( ()=>{
         callback()
+        /*TODO 依赖项里面加上callback会造成无限循环，这和useCallback 和useMemo有关系*/
     },[])
 }
 
