@@ -1,7 +1,7 @@
 import {User} from "screens/project-list/search-panel"
 import { Dropdown, Menu, Table, TableProps, Modal } from "antd";
 import dayjs from 'dayjs'
-interface Project {
+export interface Project {
     id:string;
     name: string;
     personId:string;
@@ -9,12 +9,14 @@ interface Project {
     organization:string;
     created: number
 }
-interface ListProps {
-    list: Project[]
+
+interface ListProps extends TableProps<Project> {
+    // list: Project[]
     users:User[]
 }
 
-export const List = ({list,users}:ListProps) => {
+/*这里的ListProps类型就是user类型数组 和 Table中的TableProps类型的联合类型，props中是一个对象，里面有些table的一些配置项键值对*/
+export const List = ({users,...props}:ListProps) => {
     console.log('打印list',users)
     return(
         <Table pagination={false} columns={[
@@ -45,7 +47,8 @@ export const List = ({list,users}:ListProps) => {
                 }
             }
         ]}
-            dataSource={list}/>
+           {...props}
+        />
     )
         /*用Table组件去代替*/
         //     <table>

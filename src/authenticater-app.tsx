@@ -22,8 +22,8 @@ export const AuthenticatedApp = () => {
         <Header between={true}>
             <HeaderLeft gap={true}>
                 <SoftWareLogo width={"18rem"} color={"rgb(38, 132, 255)"} />
-                <h2>项目</h2>
-                <h2>logo</h2>
+                <div> <strong>项目</strong></div>
+                <div><strong>logo</strong></div>
                 {/*我们可以改变 比如 HeaderItem as {'div'} 这样标签就可以变成div了*/}
             </HeaderLeft>
             <HeaderRight>

@@ -4,10 +4,16 @@ import { useAuth } from 'context/auth-context'
 import {Form, Input, Button} from 'antd'
 import { LongButton } from 'unauthenticated-app'
 const apiUrl = process.env.REACT_APP_API_URL
-export const ResigterScreen =  () =>{
+export const ResigterScreen =  ({onError}:{ onError:(error:Error) => void }) =>{
     const  {register} = useAuth()
     const handleSubmit =  (values:{username:string,password:string}) => {
-        register(values)
+        try{
+            register(values)
+        }catch(e){
+            
+        }
+
+
     }
   /*  const handleSubmit =  (e:any) => {
         e.preventDefault()

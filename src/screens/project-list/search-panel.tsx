@@ -23,7 +23,7 @@ export const SearchPanel = ({param, users, setParam}: SearchPanelProps) => {
     * 这时候list肯定要在父组件上的，所以只能用状态提升，将搜索框的状态和list的状态写在父组件，
     * 再将以props的形式传到子组件*/
     return (
-        <Form style={{marginLeft: "2rem"}} layout={"inline"}>
+        <Form style={{marginLeft: "2rem",marginBottom:"2rem"}} layout={"inline"}>
             <Form.Item>
                 <Input
                     placeholder={'项目名'}
